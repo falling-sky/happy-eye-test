@@ -1,0 +1,58 @@
+body {
+ font-family: sans-serif; 
+}
+html {
+ overflow-y: scroll; 
+}
+
+#query_log_container {
+  overflow-x: scroll;
+  width: 100%;
+}
+
+
+#title  { 
+  font-family: sans-serif;
+}
+
+a:link, a:visited, a:hover, a:active {
+  font-weight: bold;
+  color: black;
+}
+
+span.active {
+  font-weight: bold;
+  background-color: #00ff00;
+}
+
+span.inactive {
+  font-weight: normal;
+}
+
+
+th { 
+  background-color: #000000;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+td {vertical-align: top;}
+
+a {  white-space:nowrap; }   
+
+
+.ipv6 {
+  background-color: #eeffee;
+}
+.ipv4 {
+  background-color: #FFeecc;
+}
+.error {
+  background-color: #ffeeee;
+}
+.timeout {
+  background-color: #aaaaaa;
+}
+.log {
+  white-space: nowrap;
+}

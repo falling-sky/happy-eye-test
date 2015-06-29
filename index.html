@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>Test your Happy Eyeballs.</title>
+  <link rel="SHORTCUT ICON" href="http://test-ipv6.com/images/favicon.ico" />
+  <link rel="stylesheet" href="index.css?version=.6" type="text/css" />
+  <link rel="apple-touch-icon" href="images/knob_info.png" />
+  <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="mootools-1.2.4-core.js"></script>
+  <script type="text/javascript" src="jquery.jsonp-2.0.2.js"></script>
+  <script type="text/javascript" src="index.js"></script>
+</head>
+
+<body>
+  <h1 id="title" style="margin-bottom:0;">Happy Eyeballs Test</h1>
+
+  <div id="introduction">
+    <p>This is a test for Happy Eyeballs. It will repeatedly attempt to load, via this browser instance, a randomly
+    named dual stack javascript resource. Below you will see counters of how often IPv6 is used, IPv4 is used, or both
+    fail.</p>
+    <p>Note that if you move this tab to the background it will run for up
+    to just 3 hours.  Bringing it to the foreground will resume the test.
+    </p>
+  </div>
+
+  <div id="options">
+    <p>Click to: <span id="use_random"><a href="javascript:GIGO.use_random();1;">use random addresses</a></span> |
+    <span id="use_cacheable"><a href="javascript:GIGO.use_cacheable();1;">use cacheable addresses</a></span> |
+    <span id="use_stop"><a href="javascript:GIGO.use_stop();1;">stop</a></span></p>
+  </div>
+
+  <div id="content">
+    <table border="1">
+      <tr>
+        <th>Protocol</th>
+
+        <th>Count</th>
+
+        <th>Percentage</th>
+      </tr>
+
+      <tr class="ipv4">
+        <td>IPv4</td>
+
+        <td id="ipv4"></td>
+
+        <td id="percent_ipv4"></td>
+      </tr>
+
+      <tr class="ipv6">
+        <td>IPv6</td>
+
+        <td id="ipv6"></td>
+
+        <td id="percent_ipv6"></td>
+      </tr>
+
+      <tr class="error">
+        <td>Error (under 7s)</td>
+
+        <td id="error"></td>
+
+        <td id="percent_error"></td>
+      </tr>
+
+      <tr class="timeout">
+        <td>Timeout (over 7s)</td>
+
+        <td id="timeout"></td>
+
+        <td id="percent_timeout"></td>
+      </tr>
+    </table>
+  </div>
+  <hr />
+
+  <h2>JSON query log</h2>
+
+  <div id="query_log_container">
+    <div id="query_log"></div>
+  </div>
+  <!-- Do I ever hate the ways that browsers break things with javascript disabled. Can't even count on noscript tags. !-->
+
+  <div id="noscript">
+    <p>JavaScript required</p>
+  </div>
+  
+  <script type="text/javascript">
+//<![CDATA[
+  jQuery("#noscript").hide();
+  GIGO.start_happy_eyeballs_test();
+  //]]>
+  </script>
+</body>
+</html>
