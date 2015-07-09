@@ -1,9 +1,7 @@
 
 beta: 
-#	rsync -av index.html *.js *.map index.css /var/www/stuff.gigo.com/happy-eye-test-beta/.
-	rsync -av index.html *.js *.map index.css /var/www/he.test-ipv6.com/.
+	rsync -av index.html *.js *.map index.css /var/www/stuff.gigo.com/happy-eye-test/.
+	rsync -av index.html *.js *.map index.css /var/www/stuff.gigo.com/happy-eye-test-beta/.
 
-
-prod: 
-#	rsync -av index.html *.js *.map index.css /var/www/stuff.gigo.com/happy-eye-test/.
+prod: beta
 	rsync -av index.html *.js *.map index.css /var/www/he.test-ipv6.com/.

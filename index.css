@@ -15,6 +15,10 @@ html {
   font-family: sans-serif;
 }
 
+.new_url {
+  background-color: #ffffee;
+}
+
 a:link, a:visited, a:hover, a:active {
   font-weight: bold;
   color: black;

@@ -189,8 +189,15 @@ GIGO.maybe_run_one_test = function() {
   }
 };
 
+GIGO.show_canonical_url = function() {
+  if (window.location.href.indexOf("gigo.com") > -1) {
+    $("#new_url").show();
+  }
+}
+
 
 GIGO.start_happy_eyeballs_test = function() {
+  GIGO.show_canonical_url();
   GIGO.random_after_N(1);
   setInterval(GIGO.maybe_run_one_test, 1000);
 };
