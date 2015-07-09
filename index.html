@@ -13,6 +13,7 @@
   <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
   <script type="text/javascript" src="mootools-1.2.4-core.js"></script>
   <script type="text/javascript" src="jquery.jsonp-2.0.2.js"></script>
+  <script type="text/javascript" src="jstat.js"></script>
   <script type="text/javascript" src="index.js"></script>
 </head>
 
@@ -57,6 +58,11 @@
         <th>Count</th>
 
         <th>Percentage</th>
+        
+        <th>Average</th>
+        <th>Median</th>
+        <th>StdDev</th>
+        
       </tr>
 
       <tr class="ipv4">
@@ -65,6 +71,12 @@
         <td id="ipv4"></td>
 
         <td id="percent_ipv4"></td>
+        
+        <td id="average_ipv4"></td>
+        <td id="median_ipv4"></td>
+        <td id="stddev_ipv4"></td>
+        
+        
       </tr>
 
       <tr class="ipv6">
@@ -73,14 +85,20 @@
         <td id="ipv6"></td>
 
         <td id="percent_ipv6"></td>
+        <td id="average_ipv6"></td>
+        <td id="median_ipv6"></td>
+        <td id="stddev_ipv6"></td>
       </tr>
 
       <tr class="error">
         <td>Error (under 7s)</td>
 
         <td id="error"></td>
-
         <td id="percent_error"></td>
+        <td id="average_error"></td>
+        <td id="median_error"></td>
+        <td id="stddev_error"></td>
+        
       </tr>
 
       <tr class="timeout">
@@ -89,6 +107,9 @@
         <td id="timeout"></td>
 
         <td id="percent_timeout"></td>
+        <td id="average_timeout"></td>
+        <td id="median_timeout"></td>
+        <td id="stddev_timeout"></td>
       </tr>
     </table>
   </div>

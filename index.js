@@ -45,14 +45,33 @@ GIGO.getms = function () {
 
 
 GIGO.reset = function() {
+
+  // Reset counter, affects when we change random names next
   GIGO.counter = 0;
+  
+  // Reset stats relating to succcess/fail
   GIGO.tries = {};
   GIGO.tries.ipv4 = 0;
   GIGO.tries.ipv6 = 0;
   GIGO.tries.error = 0;
   GIGO.tries.timeout = 0;
+  
+  // Reset stats relating to timing
+  GIGO.times = {};
+  GIGO.times.ipv4 = [];
+  GIGO.times.ipv6 = [];
+  GIGO.times.error = [];
+  GIGO.times.timeout = [];
+  
+  // Immediately show the stats to effectively clear the page
   GIGO.display_stats();
+  
+  // Keep track of the last time we reset the page
+  // This is used to know that a finished jsonp response
+  // is either old/stale, or relevant for processing
   GIGO.last_reset = GIGO.getms();
+  
+  // Clear the visual log
   $("#query_log").html("");
 };
 
@@ -86,6 +105,33 @@ GIGO.start = function() {
   GIGO.run = 1;
 };
 
+GIGO.display_stats_helper = function(x) {
+  var a, j, result;
+  a = GIGO.times[x];
+  j = jStat(a);
+  
+
+  result=jStat.median(a);
+  result = result / 1000;
+  result = result.toFixed(3);
+  $("td#median_" + x).text(result);
+
+  result=jStat.stdev(a);
+  result = result / 1000;
+  result = result.toFixed(3);
+  $("td#stddev_" + x).text(result);
+
+  result=jStat.sum(a);
+  if (a.length > 0){
+    result = result / a.length;
+  } else {
+    result = 0;
+  }
+  result = result / 1000;
+  result = result.toFixed(3);
+  $("td#average_" + x).text(result);
+  
+}
 
 GIGO.display_stats = function() {
   var total;
@@ -100,10 +146,17 @@ GIGO.display_stats = function() {
     total = 1;
   }
   
-  $("td#percent_ipv4").text((GIGO.tries.ipv4 * 100 / total ).toFixed(2));
-  $("td#percent_ipv6").text((GIGO.tries.ipv6 * 100 / total ).toFixed(2));
-  $("td#percent_error").text((GIGO.tries.error * 100 / total ).toFixed(2));
-  $("td#percent_timeout").text((GIGO.tries.timeout * 100 / total ).toFixed(2));
+  $("td#percent_ipv4").text((GIGO.tries.ipv4 * 100 / total ).toFixed(2)  + '%' );
+  $("td#percent_ipv6").text((GIGO.tries.ipv6 * 100 / total ).toFixed(2) + '%' );
+  $("td#percent_error").text((GIGO.tries.error * 100 / total ).toFixed(2) + '%');
+  $("td#percent_timeout").text((GIGO.tries.timeout * 100 / total ).toFixed(2) + '%"');
+  
+  
+  GIGO.display_stats_helper("ipv4");
+  GIGO.display_stats_helper("ipv6");
+  GIGO.display_stats_helper("error");
+  GIGO.display_stats_helper("timeout");
+  
   
 };
 
@@ -165,6 +218,7 @@ GIGO.test_json = function() {
         delta_s = delta / 1000;
         delta_s = delta_s.toFixed(3);
         GIGO.tries[status] = GIGO.tries[status] + 1;
+        GIGO.times[status].push(delta);
         GIGO.display_stats();
         $div = $("<div>", {class: "log"} );
         $div.addClass(status);
