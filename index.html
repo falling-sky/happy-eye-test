@@ -26,12 +26,24 @@
     <p>Note that if you move this tab to the background it will run for up
     to just 3 hours.  Bringing it to the foreground will resume the test.
     </p>
+    <p>Simple requests may be sent to jfesler@test-ipv6.com for
+    consideration.  Pull requests more strongly considered,
+    see the <a href="https://github.com/falling-sky/happy-eye-test">GitHub
+    repo.</a>.
+    
+    
+    
   </div>
 
   <div id="options">
-    <p>Click to: <span id="use_random"><a href="javascript:GIGO.use_random()">use random addresses</a></span> |
-    <span id="use_cacheable"><a href="javascript:GIGO.use_cacheable()">use cacheable addresses</a></span> |
-    <span id="use_stop"><a href="javascript:GIGO.use_stop()">stop</a></span></p>
+    <p>Change DNS name every N calls, where N is: 
+    <span id="n_1"><a href="javascript:GIGO.random_after_N(1)">1</a></span>
+    |
+    <span id="n_10"><a href="javascript:GIGO.random_after_N(10)">10</a></span>
+    |
+    <span id="n_100000"><a href="javascript:GIGO.random_after_N(100000)">100000</a></span>
+    |
+    <span id="use_stop"><a href="javascript:GIGO.use_stop()">stop</a></span>
   </div>
 
   <div id="content">

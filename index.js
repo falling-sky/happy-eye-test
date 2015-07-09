@@ -12,7 +12,8 @@
   
 
 var GIGO = {}; // We will use this as a name space.
-GIGO.random = 0;
+GIGO.after_N = 1;
+GIGO.counter = 0;
 GIGO.base_host = "ds.test-ipv6.com";
 GIGO.base_uri = "/ip/?callback=?";
 GIGO.timeout = 7000;
@@ -44,6 +45,7 @@ GIGO.getms = function () {
 
 
 GIGO.reset = function() {
+  GIGO.counter = 0;
   GIGO.tries = {};
   GIGO.tries.ipv4 = 0;
   GIGO.tries.ipv6 = 0;
@@ -56,30 +58,24 @@ GIGO.reset = function() {
 
 GIGO.use_stop = function() {
  GIGO.stop();
+ GIGO.inactivate_selections();
  $("#use_stop").attr("class","active");
- $("#use_cacheable").attr("class","inactive");
- $("#use_random").attr("class","inactive");
 }
 
-GIGO.use_random = function() {
-  GIGO.random = 1;
-  GIGO.reset();
-  GIGO.stop();
-  GIGO.start();
+GIGO.inactivate_selections = function() {
+  $("#n_1").attr("class","inactive");
+  $("#n_10").attr("class","inactive");
+  $("#n_100000").attr("class","inactive");
   $("#use_stop").attr("class","inactive");
-  $("#use_cacheable").attr("class","inactive");
-  $("#use_random").attr("class","active");
-};
+}
 
-GIGO.use_cacheable = function() {
-  GIGO.random = 0;
+GIGO.random_after_N = function(i) {
+  GIGO.after_N = i;
   GIGO.reset();
-  GIGO.last_random = GIGO.gen_random();
   GIGO.stop();
   GIGO.start();
-  $("#use_stop").attr("class","inactive");
-  $("#use_cacheable").attr("class","active");
-  $("#use_random").attr("class","inactive");
+  GIGO.inactivate_selections();
+  $("#n_" + i).attr("class","active");
 };
 
 GIGO.stop = function() {
@@ -121,13 +117,15 @@ GIGO.gen_random = function() {
 
 GIGO.get_url = function() { 
   var r1, r2;
-  if (GIGO.random) {
+  if ((GIGO.counter % GIGO.after_N) == 0)  {
     r1 = GIGO.gen_random();
     r2 = r1;
+    GIGO.last_random = r1;
   } else {
     r1 = GIGO.last_random;
     r2 = GIGO.gen_random();
   }
+  GIGO.counter = GIGO.counter + 1;
   return "http://" + r1 + "." + GIGO.base_host + GIGO.base_uri + "&testname=he&random=" + r2;
 };
 
@@ -161,15 +159,17 @@ GIGO.test_json = function() {
       }
     },
     "complete": function() {
-      var $div, ts;
+      var $div, ts, delta_s;
       if (active_reset == GIGO.last_reset) {
         ts = new Date(start_time).toTimeString();
+        delta_s = delta / 1000;
+        delta_s = delta_s.toFixed(3);
         GIGO.tries[status] = GIGO.tries[status] + 1;
         GIGO.display_stats();
         $div = $("<div>", {class: "log"} );
         $div.addClass(status);
         
-        $div.text(ts  + " " + status + " " + url);
+        $div.text(ts  + " " + status + " " + delta_s + " " + url);
         $("#query_log").prepend($div);
       }
     }
@@ -191,7 +191,7 @@ GIGO.maybe_run_one_test = function() {
 
 
 GIGO.start_happy_eyeballs_test = function() {
-  GIGO.use_random();
+  GIGO.random_after_N(1);
   setInterval(GIGO.maybe_run_one_test, 1000);
 };
 
