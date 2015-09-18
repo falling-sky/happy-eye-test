@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta name="generator" content="HTML Tidy for Linux (vers 25 March 2009), see www.w3.org" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <title>Happy Eyeballs Results per User Agent</title>
+  <link rel="SHORTCUT ICON" href="http://test-ipv6.com/images/favicon.ico" />
+  <link rel="stylesheet" href="index.css?version=.6" type="text/css" />
+  <link rel="apple-touch-icon" href="images/knob_info.png" />
+  <script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+  <script type="text/javascript" src="mootools-1.2.4-core.js"></script>
+  <script type="text/javascript" src="jquery.jsonp-2.0.2.js"></script>
+  <script type="text/javascript" src="jstat.js"></script>
+  <script type="text/javascript" src="hedata.js"></script>
+  <script type="text/javascript" src="hedata.inc.js"></script>
+</head>
+
+<body>
+  <h1 id="title" style="margin-bottom:0;">Happy Eyeballs Results</h1>
+
+  <div id="introduction">
+    <p>Browse the user agent stats, filtered by regex and minimum count.
+    Regular expressions are javascript based.
+    You can adjust the "minimum", which will require that a given user agent
+    appeared several times in my logs before being in this list.
+    25 appears to be a good baseline number that filers out many
+    preproduction browser builds.
+    </p>
+    <p>Data: logs from test-ipv6.com where user was positively dual stack
+    from the last 90 days. <b>Disclaimers: </b> Users visiting site are self-selecting and biased to
+    check their IPv6.  Overall numbers are small to the point of probably
+    not being statisticaly useful.  But sometimes this stuff is fun.</p>
+
+    <div><a href="javascript:use_my_ua();" style="color:blue">Use my user agent: </a></div><div id=my_ua style="font-size: small"></div>
+    
+    <form>
+    Regex: <input id=regex type=text size=60 value='\b(Apple|Macintosh|iPhone|iPad)\b'></br>
+    Minimum: <input id=min type=text value="25"></br>
+    </form>
+    
+    
+    
+
+    <p>Simple requests may be sent to jfesler@test-ipv6.com for
+    consideration.  Pull requests more strongly considered,
+    see the <a href="https://github.com/falling-sky/happy-eye-test">GitHub
+    repo.</a>.
+  </div>
+
+  <hr />
+
+
+  <div id="content">
+  </div>
+  
+  
+
+  <!-- Do I ever hate the ways that browsers break things with javascript disabled. Can't even count on noscript tags. !-->
+
+  <div id="noscript">
+    <p>JavaScript required</p>
+  </div>
+  
+  <script type="text/javascript">
+//<![CDATA[
+  jQuery("#noscript").hide();
+  setInterval( check_changed, 1000);
+  var ua = String(navigator.userAgent);
+  $("#my_ua").text(ua);
+      
+  //]]>
+  </script>
+</body>
+</html>
