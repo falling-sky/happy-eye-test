@@ -149,7 +149,7 @@ GIGO.display_stats = function() {
   $("td#percent_ipv4").text((GIGO.tries.ipv4 * 100 / total ).toFixed(2)  + '%' );
   $("td#percent_ipv6").text((GIGO.tries.ipv6 * 100 / total ).toFixed(2) + '%' );
   $("td#percent_error").text((GIGO.tries.error * 100 / total ).toFixed(2) + '%');
-  $("td#percent_timeout").text((GIGO.tries.timeout * 100 / total ).toFixed(2) + '%"');
+  $("td#percent_timeout").text((GIGO.tries.timeout * 100 / total ).toFixed(2) + '%');
   
   
   GIGO.display_stats_helper("ipv4");
