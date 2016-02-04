@@ -94,6 +94,7 @@ make_happy_color = function(happy) {
 use_my_ua = function() {
   var ua = String(navigator.userAgent);
   var uae = RegExp.escape(ua);
+  uae = '^'  + uae + '$';
   $("#regex").val(uae);
 }
 
